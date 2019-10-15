@@ -1,7 +1,6 @@
 <template>
   <div class="questions">
-    <h1>This is the page where the questions go.</h1>
-    <li v-for="question in questions" :key="question.qnumber">{{ question.title }}</li>
+    <li v-for="question in questions" :key="question.qnumber">{{ question.description }}</li>
   </div>
 </template>
 
@@ -12,26 +11,21 @@ export default {
   name: "questions",
   data: function() {
     return {
-      questions: [
-        {
-          qnumber: 1,
-          title: "Question 1",
-          description: "How many unique cities are in the dataset?",
-          format: "JSON",
-          answer: 1965,
-          base_score: 10
-        },
-        {
-          qnumber: 2,
-          title: "Question 2",
-          description:
-            "How many something goes here this is another question bro?",
-          format: "JSON",
-          answer: 1800,
-          base_score: 10
-        }
-      ]
+      questions: []
     };
+  },
+  created: function() {
+    this.getQuestions();
+  },
+  methods: {
+    getQuestions: function() {
+      return (
+        axios
+          // TODO: hardcode the beginning of the url before /api to ds-leaderboard
+          .get(`http://155.138.211.103/api/questions`)
+          .then(resp => (this.questions = resp.data))
+      );
+    }
   }
 };
 </script>

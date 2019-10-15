@@ -8,19 +8,37 @@
         <th>Score</th>
         <th>Last Submission</th>
       </tr>
-      <tr>
-        <td>1</td>
-        <td>The Tigers</td>
-        <td>35</td>
-        <td>8:00pm</td>
+      <tr v-for="user in users" :key="user.username">
+        <td>{{ user.rank }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.score }}</td>
+        <td>{{ user.last_submission }}</td>
       </tr>
     </table>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  name: "Leaderboard"
+  name: "Leaderboard",
+  data: function() {
+    return {
+      users: []
+    };
+  },
+  created: function() {
+    this.getUsers();
+  },
+  methods: {
+    getUsers: function() {
+      // TODO: replace url with hardcoded one bro
+      return axios
+        .get(`http://155.138.211.103/api/users`)
+        .then(resp => (this.users = resp.data));
+    }
+  }
 };
 </script>
 
