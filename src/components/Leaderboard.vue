@@ -14,7 +14,7 @@
         <td>{{ user.username }}</td>
         <td>{{ user.score }}</td>
         <td>{{ user.attempts }}</td>
-        <td>{{ user.last_submission }}</td>
+        <td>{{ moment(user.last_submission).format('LLL') }}</td>
       </tr>
     </table>
   </div>
@@ -22,6 +22,7 @@
 
 <script>
 import axios from "axios";
+import moment from "moment";
 
 export default {
   name: "Leaderboard",
@@ -36,8 +37,11 @@ export default {
   methods: {
     getUsers: function() {
       return axios
-        .get(`http://ds-leaderboards.com/api/users`)
+        .get(`http://ds-leaderboards.com:5000/api/users`)
         .then(resp => (this.users = resp.data));
+    },
+    moment: function() {
+      return moment();
     }
   }
 };
