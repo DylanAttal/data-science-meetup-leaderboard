@@ -1,22 +1,24 @@
 <template>
   <div>
     <h1 class="header">Data Science Leaderboard</h1>
-    <table class="paleBlueRows">
-      <tr>
-        <th>Rank</th>
-        <th>Team</th>
-        <th>Score</th>
-        <th>Attempts</th>
-        <th>Last Submission</th>
-      </tr>
-      <tr v-for="user in users" :key="user.username">
-        <td>{{ user.rank }}</td>
-        <td>{{ user.username }}</td>
-        <td>{{ user.score }}</td>
-        <td>{{ user.attempts }}</td>
-        <td>{{ moment(user.last_submission).format('LLL') }}</td>
-      </tr>
-    </table>
+    <div class="wrapper">
+      <table class="paleBlueRows">
+        <tr>
+          <th>Rank</th>
+          <th>Team</th>
+          <th>Score</th>
+          <th>Attempts</th>
+          <th>Last Submission</th>
+        </tr>
+        <tr v-for="user in users" :key="user.username">
+          <td>{{ user.rank }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.score }}</td>
+          <td>{{ user.attempts }}</td>
+          <td>{{ moment(user.last_submission).format('LLL') }}</td>
+        </tr>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -48,6 +50,11 @@ export default {
 </script>
 
 <style scoped>
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 .header {
   width: 100%;
   margin: 0;
@@ -59,10 +66,12 @@ export default {
 
 table.paleBlueRows {
   font-family: "Times New Roman", Times, serif;
-  border: 1px solid #ffffff;
-  width: 100%;
+  border: 1px solid #000 !important;
+  box-shadow: 0px 0px 2px #000;
+  width: 85%;
   text-align: center;
   border-collapse: collapse;
+  margin-top: 2rem;
 }
 
 table.paleBlueRows td,
