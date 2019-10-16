@@ -19,12 +19,9 @@ export default {
   },
   methods: {
     getQuestions: function() {
-      return (
-        axios
-          // TODO: hardcode the beginning of the url before /api to ds-leaderboard
-          .get(`http://155.138.211.103/api/questions`)
-          .then(resp => (this.questions = resp.data))
-      );
+      return axios
+        .get(`http://ds-leaderboards.com/api/questions`)
+        .then(resp => (this.questions = resp.data));
     }
   }
 };

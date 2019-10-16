@@ -6,12 +6,14 @@
         <th>Rank</th>
         <th>Team</th>
         <th>Score</th>
+        <th>Attempts</th>
         <th>Last Submission</th>
       </tr>
       <tr v-for="user in users" :key="user.username">
         <td>{{ user.rank }}</td>
         <td>{{ user.username }}</td>
         <td>{{ user.score }}</td>
+        <td>{{ user.attempts }}</td>
         <td>{{ user.last_submission }}</td>
       </tr>
     </table>
@@ -33,9 +35,8 @@ export default {
   },
   methods: {
     getUsers: function() {
-      // TODO: replace url with hardcoded one bro
       return axios
-        .get(`http://155.138.211.103/api/users`)
+        .get(`http://ds-leaderboards.com/api/users`)
         .then(resp => (this.users = resp.data));
     }
   }
