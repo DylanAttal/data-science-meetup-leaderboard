@@ -72,6 +72,7 @@ table.paleBlueRows {
   text-align: center;
   border-collapse: collapse;
   margin-top: 2rem;
+  margin-bottom: 10rem;
 }
 
 table.paleBlueRows td,
