@@ -30,7 +30,7 @@ export default {
   methods: {
     getQuestions: function() {
       return axios
-        .get(`http://ds-leaderboards.com:5000/api/questions`)
+        .get(`http://155.138.211.103:5000/api/questions`)
         .then(resp => (this.questions = resp.data));
     }
   }

@@ -59,9 +59,13 @@ export default {
   },
   methods: {
     getUsers: function() {
-      return axios
-        .get(`http://ds-leaderboards.com:5000/api/users`)
-        .then(resp => (this.users = resp.data));
+      return axios.get(`http://155.138.211.103:5000/api/users`).then(resp => {
+        for (let i of resp.data) {
+          if (resp.data[i].attempts) {
+            this.users.push(resp.data[i]);
+          }
+        }
+      });
     },
     rowClass: function() {
       return "row-class";
