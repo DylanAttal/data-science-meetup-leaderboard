@@ -17,7 +17,7 @@
         :per-page="perPage"
         aria-controls="my-table"
       ></b-pagination>
-      <p class="mt-1">Current Page: {{ currentPage }}</p>
+      <p class="mt-1 current-page">Current Page: {{ currentPage }}</p>
     </div>
     <div class="footer">
       <p>
@@ -76,6 +76,10 @@ export default {
 </script>
 
 <style scoped>
+p {
+  margin-bottom: 0;
+}
+
 #sdg-logo {
   height: 30px;
   cursor: pointer;
@@ -112,7 +116,6 @@ table /deep/ tr.row-class {
 .footer {
   width: 100%;
   margin: 0;
-  padding: 20px;
   background-color: #eee;
   color: rgb(88, 88, 88);
   font-family: "Roboto", "Helvetica Neue", sans-serif;
