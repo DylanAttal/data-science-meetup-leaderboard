@@ -113,7 +113,7 @@ table /deep/ tr.row-class {
   width: 100%;
   margin: 0;
   padding: 20px;
-  background-color: #d0e4f5;
+  background-color: #eee;
   color: rgb(88, 88, 88);
   font-family: "Roboto", "Helvetica Neue", sans-serif;
   font-size: 1rem;
