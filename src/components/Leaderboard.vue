@@ -17,7 +17,6 @@
         :per-page="perPage"
         aria-controls="my-table"
       ></b-pagination>
-      <p class="mt-1 current-page">Current Page: {{ currentPage }}</p>
     </div>
     <div class="footer">
       <p>
@@ -39,7 +38,6 @@
 
 <script>
 import axios from "axios";
-import moment from "moment";
 
 export default {
   name: "Leaderboard",
@@ -64,9 +62,6 @@ export default {
       return axios
         .get(`http://ds-leaderboards.com:5000/api/users`)
         .then(resp => (this.users = resp.data));
-    },
-    moment: function() {
-      return moment();
     },
     rowClass: function() {
       return "row-class";
@@ -115,6 +110,8 @@ table /deep/ tr.row-class {
 
 .footer {
   width: 100%;
+  position: fixed;
+  bottom: 0;
   margin: 0;
   background-color: #eee;
   color: rgb(88, 88, 88);
