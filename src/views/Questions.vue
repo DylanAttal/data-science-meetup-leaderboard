@@ -39,7 +39,6 @@ export default {
 
 <style scoped>
 .card {
-  /* width: fit-content; */
   width: 750px;
   border: 1px solid grey;
   border-radius: 4px;
