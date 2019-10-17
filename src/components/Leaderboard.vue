@@ -1,23 +1,38 @@
 <template>
   <div>
-    <h1 class="header">Data Science Leaderboard</h1>
+    <h4 class="header">Data Science Leaderboard</h4>
     <div class="wrapper">
-      <table class="paleBlueRows">
-        <tr>
-          <th>Rank</th>
-          <th>Team</th>
-          <th>Score</th>
-          <th>Attempts</th>
-          <th>Last Submission</th>
-        </tr>
-        <tr v-for="user in users" :key="user.username">
-          <td>{{ user.rank }}</td>
-          <td>{{ user.username }}</td>
-          <td>{{ user.score }}</td>
-          <td>{{ user.attempts }}</td>
-          <td>{{ moment(user.last_submission).format('LLL') }}</td>
-        </tr>
-      </table>
+      <b-table
+        id="leaderboard-table"
+        :items="users"
+        :fields="fields"
+        :per-page="perPage"
+        :current-page="currentPage"
+        tbodyTrClass="row-class"
+        small
+      />
+      <b-pagination
+        v-model="currentPage"
+        :total-rows="rows"
+        :per-page="perPage"
+        aria-controls="my-table"
+      ></b-pagination>
+      <p class="mt-1">Current Page: {{ currentPage }}</p>
+    </div>
+    <div class="footer">
+      <p>
+        This meetup sponsored by Suncoast Developers Guild
+        <span>
+          <a href="https://suncoast.io/" target="_blank">
+            <img src="./assets/SDGLogo.png" id="sdg-logo" />
+          </a>
+        </span>and
+        <span>
+          <a href="https://www.ozk.com/labs/" target="_blank">
+            <img src="./assets/BankOZKLogo.png" id="bank-ozk-logo" />
+          </a>.
+        </span>
+      </p>
     </div>
   </div>
 </template>
@@ -30,11 +45,19 @@ export default {
   name: "Leaderboard",
   data: function() {
     return {
-      users: []
+      users: [],
+      perPage: 10,
+      currentPage: 1,
+      fields: ["rank", "", "score", "username", "attempts", "last_submission"]
     };
   },
   created: function() {
     this.getUsers();
+  },
+  computed: {
+    rows: function() {
+      return this.users.length;
+    }
   },
   methods: {
     getUsers: function() {
@@ -44,77 +67,55 @@ export default {
     },
     moment: function() {
       return moment();
+    },
+    rowClass: function() {
+      return "row-class";
     }
   }
 };
 </script>
 
 <style scoped>
+#sdg-logo {
+  height: 30px;
+  cursor: pointer;
+  margin-right: 4px;
+}
+
+#bank-ozk-logo {
+  height: 90px;
+  position: relative;
+  bottom: 2px;
+  cursor: pointer;
+}
+
+table /deep/ tr.row-class {
+  font-size: 0.8rem !important;
+}
+
 .wrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .header {
   width: 100%;
   margin: 0;
-  padding: 30px;
-  background-color: #3f51b5;
-  color: #fff;
+  padding: 20px;
+  background-color: #d0e4f5;
+  color: rgb(88, 88, 88);
   font-family: "Roboto", "Helvetica Neue", sans-serif;
 }
 
-table.paleBlueRows {
-  font-family: "Times New Roman", Times, serif;
-  border: 1px solid #000 !important;
-  box-shadow: 0px 0px 2px #000;
-  width: 85%;
-  text-align: center;
-  border-collapse: collapse;
-  margin-top: 2rem;
-  margin-bottom: 10rem;
-}
-
-table.paleBlueRows td,
-table.paleBlueRows th {
-  border: 1px solid #ffffff;
-  padding: 3px 2px;
-}
-
-table.paleBlueRows tbody td {
-  font-size: 13px;
-}
-
-table.paleBlueRows tr:nth-child(even) {
-  background: #d0e4f5;
-}
-
-table.paleBlueRows thead {
-  background: #0b6fa4;
-  border-bottom: 5px solid #ffffff;
-}
-
-table.paleBlueRows thead th {
-  font-size: 17px;
-  font-weight: bold;
-  color: #ffffff;
-  text-align: center;
-  border-left: 2px solid #ffffff;
-}
-
-table.paleBlueRows thead th:first-child {
-  border-left: none;
-}
-
-table.paleBlueRows tfoot {
-  font-size: 14px;
-  font-weight: bold;
-  color: #333333;
-  background: #d0e4f5;
-  border-top: 3px solid #444444;
-}
-
-table.paleBlueRows tfoot td {
-  font-size: 14px;
+.footer {
+  width: 100%;
+  margin: 0;
+  padding: 20px;
+  background-color: #d0e4f5;
+  color: rgb(88, 88, 88);
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  font-size: 1rem;
 }
 </style>
